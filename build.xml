@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <project name="${name}" default="test" basedir=".">
 	<property name="name" value="Hello"/>
+	
 	<path id="compile.path">
 		<pathelement location="junit-4.9.jar"/>
 	</path>
+	
 	<target name="clean">
 		<delete dir="build"/>
 	</target>
@@ -11,13 +13,10 @@
 	<target name="compile" depends="clean">
 		<mkdir dir="build/classes"/>
 		<javac srcdir="src" destdir="build/classes"/>
-	</target>
-
-	<target name="test compile" depends="compile">
 		<javac srcdir="testCase" destdir="build/classes" classpathref="compile.path"/>
 	</target>
-
-	<target name="test" depends="test compile">
+	
+	<target name="test" depends="compile">
 		<junit printsummary="on" fork="true" showoutput="true">
 			<classpath path="build/classes">
 				<path refid="compile.path" />
@@ -26,4 +25,5 @@
 			<test name="HelloWorldTest"/>
 		</junit>
 	</target>
+
 </project>
